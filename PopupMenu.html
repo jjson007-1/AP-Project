@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Popup Menu with Checkboxes</title>
+    <style>
+        body { font-family: Arial, sans-serif; }
+        .popup-container { text-align: center; }
+        label { display: block; margin: 5px 0; }
+        .popup-buttons { margin-top: 10px; }
+    </style>
+</head>
+<body>
+    <h3>Select Items</h3>
+    <form id="checkboxForm">
+        <label><input type="checkbox" value="General objectives"> General objectives</label>
+        <label><input type="checkbox" value="Specific objectives"> Specific objectives</label>
+        <label><input type="checkbox" value="Key skills of the 4C’s"> Key skills of the 4C’s</label>
+        <label><input type="checkbox" value="Term"> Term</label>
+        <label><input type="checkbox" value="Strand"> Strand</label>
+        <label><input type="checkbox" value="Theme"> Theme</label>
+        <label><input type="checkbox" value="Sub theme"> Sub theme</label>
+        <label><input type="checkbox" value="Instructional material/resources"> Instructional material/resources</label>
+        <label><input type="checkbox" value="Key vocabulary"> Key vocabulary</label>
+        <label><input type="checkbox" value="Focus question (primary)"> Focus question (primary)</label>
+        <label><input type="checkbox" value="Attainment Target (primary)"> Attainment Target (primary)</label>
+        <label><input type="checkbox" value="Cognitive levels (primary)"> Cognitive levels (primary)</label>
+        <label><input type="checkbox" value="Effective (primary)"> Effective (primary)</label>
+        <label><input type="checkbox" value="Psychomotor (primary)"> Psychomotor (primary)</label>
+        <label><input type="checkbox" value="Prior learning or PRE-REQUISITE KNOWLEDGE"> Prior learning or PRE-REQUISITE KNOWLEDGE</label>
+        <label><input type="checkbox" value="Learning outcomes"> Learning outcomes</label>
+        <label><input type="checkbox" value="Teaching/learning activity"> Teaching/learning activity</label>
+        <label><input type="checkbox" value="Dominant life skill (Subject HFLE only)"> Dominant life skill (Subject HFLE only)</label>
+        <label><input type="checkbox" value="Value (Subject HFLE only)"> Value (Subject HFLE only)</label>
+        <label><input type="checkbox" value="Content summary"> Content summary</label>
+        <label><input type="checkbox" value="STREAM Ideas"> STREAM Ideas</label>
+    </form>
+    <div class="popup-buttons">
+        <button onclick="submitSelection()">Submit</button>
+        <button onclick="google.script.host.close()">Cancel</button>
+    </div>
+    <script>
+        function submitSelection() {
+            let checkboxes = document.querySelectorAll("#checkboxForm input[type='checkbox']:checked");
+            let selectedItems = [];
+            checkboxes.forEach(checkbox => selectedItems.push(checkbox.value));
+
+            if (selectedItems.length > 0) {
+                google.script.run.sendDataToSheets(selectedItems);
+                google.script.host.close();
+            } else {
+                alert("Please select at least one item.");
+            }
+        }
+    </script>
+</body>
+</html>
